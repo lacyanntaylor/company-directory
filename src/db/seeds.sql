@@ -10,22 +10,21 @@ VALUES ('Accounting'),
         ('Operations'),
         ('Sales');
 
--- INSERT INTO role (title, salary, department_id)
--- VALUES ('Accounting Supervisor', 100000, 1),
---         ('Engineering Supervisor', 120000, 2)
---         ('HR Supervisor', 75000, 3)
---         ('IT Supervisor', 130000, 4)
---         ('Marketing Supervisor', 80000, 5)
---         ('Customer Service Supervisor', 80000, 6)
---         ('Operations Supervisor', 110000, 7)
---         ('Sales Supervisor', 80000, 8);
+ INSERT INTO role (title, salary, department_id),
+VALUES ('Accountant', 100000, 1),
+       ('Engineer', 100000, 2),
+       ('HR Representative', 55000, 3),
+        ('IT Technician', 90000, 4),
+        ('Human Relations Supervisor', 110000, 5),
+        ('Customer Service Representative', 60000, 6),
+        ('Business Supervisor', 110000, 7);
 
--- INSERT INTO employees (first_name, last_name, role_id, manager_id)
--- VALUES ('Kathy', 'Henderson', 1, NULL)
---         ('Lacy', 'Taylor', 2, 1)
---         ('James', 'Williams', 3, )
---         ('Sandra', 'Smith', 4, )
---         ('Dillard', 'Dickerson', 5, )
---         ('Micheal', 'Bender', 6, )
---         ('Megan', 'Malone', 7, )
---         ('Cary', 'Mason', 8, );
+INSERT INTO employees (first_name, last_name, role_id, manager_id),
+VALUES ('Kathy', 'Henderson', 1, 7),
+        ('Lacy', 'Taylor', 2, 8),
+        ('James', 'Williams', 3, 6),
+        ('Sandra', 'Smith', 4, 8),
+        ('Dillard', 'Dickerson', 5, NULL),
+        ('Micheal', 'Bender', 6, 5),
+        ('Megan', 'Malone', 7, NULL),
+        ('Cary', 'Mason', 8, NULL);

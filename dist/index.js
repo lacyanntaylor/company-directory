@@ -27,6 +27,11 @@ inquirer.prompt([
         });
     }
     if (action == "view all roles") {
+        pool.query("SELECT * FROM roles;")
+        .then(results => {
+        // console.log(results)
+        const roles = results.rows;
+        console.table(roles);
     }
     if (action == "view all employees") {
     }

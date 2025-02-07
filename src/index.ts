@@ -25,19 +25,22 @@ inquirer
   .then(({ action }) => {
     if (action === "view all departments") {
       pool.query("SELECT * FROM department;").then((results) => {
-        console.table(results.rows);
+        console.table(results.rows),
+        mainMenu();
       });
     }
 
     if (action === "view all roles") {
       pool.query("SELECT * FROM roles;").then((results) => {
-        console.table(results.rows);
+        console.table(results.rows),
+        mainMenu();
       });
     }
 
     if (action === "view all employees") {
       pool.query("SELECT * FROM employees;").then((results) => {
-        console.table(results.rows);
+        console.table(results.rows),
+        mainMenu();
       });
     }
 
@@ -56,7 +59,8 @@ inquirer
           ]);
         })
         .then(() => {
-          console.log("Department has been added!");
+          console.log("Department has been added!"),
+          mainMenu();
         });
     }
 
@@ -81,7 +85,8 @@ inquirer
           );
         })
         .then(() => {
-          console.log("Role has been added!");
+          console.log("Role has been added!"),
+          mainMenu();
         });
     }
 
@@ -106,12 +111,14 @@ inquirer
           );
         })
         .then(() => {
-          console.log("Employee has been added!");
+          console.log("Employee has been added!"),
+          mainMenu();
         });
     }
 
     if (action === "update an employee role") {
       // Fetch all employees
+
   pool.query("SELECT id, first_name, last_name FROM employees;")
   .then((results) => {
     const employees = results.rows.map(emp => ({
@@ -155,7 +162,8 @@ inquirer
     );
   })
   .then(() => {
-    console.log("Employee role updated successfully!");
+    console.log("Employee role updated successfully!"),
+    mainMenu();
   })
   .catch((err) => console.error("Error updating employee role:", err));
     }

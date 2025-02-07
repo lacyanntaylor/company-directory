@@ -3,6 +3,7 @@ import { pool, connectToDb } from './db/connection.js';
 
 await connectToDb();
 
+function mainMenu(){
 inquirer
   .prompt([
     {
@@ -17,6 +18,7 @@ inquirer
         "add a role",
         "add an employee",
         "update an employee role",
+        "exit",
       ],
     },
   ])
@@ -157,4 +159,11 @@ inquirer
   })
   .catch((err) => console.error("Error updating employee role:", err));
     }
+
+if (action === "exit"){
+  console.log("Goodbye!");
+  pool.end();
+}
   });
+}
+  mainMenu();

@@ -24,23 +24,21 @@ inquirer
   ])
   .then(({ action }) => {
     if (action === "view all departments") {
-      pool.query("SELECT * FROM departments;").then((results) => {
+      pool.query("SELECT * FROM department;").then((results) => {
         console.table(results.rows),
-        console.log("ROLES!"),
-        mainMenu();
+         mainMenu();
       });
     }
 
     if (action === "view all roles") {
-      pool.query("SELECT * FROM roles;").then((results) => {
+      pool.query("SELECT * FROM role;").then((results) => {
         console.table(results.rows),
-        console.log("EMPLOYEES!"),
         mainMenu();
       });
     }
 
     if (action === "view all employees") {
-      pool.query("SELECT * FROM employees;").then((results) => {
+      pool.query("SELECT * FROM employee;").then((results) => {
         console.table(results.rows),
         mainMenu();
       });
@@ -51,13 +49,13 @@ inquirer
         .prompt([
           {
             type: "input",
-            name: "departments_name",
+            name: "department_name",
             message: "What is the name of the new department?",
           },
         ])
-        .then(({ departments_name }) => {
-          return pool.query("INSERT INTO departments (name) VALUES ($1)", [
-            departments_name,
+        .then(({ department_name }) => {
+          return pool.query("INSERT INTO department (name) VALUES ($1)", [
+            department_name,
           ]);
         })
         .then(() => {
@@ -71,19 +69,19 @@ inquirer
         .prompt([
           {
             type: "input",
-            name: "roles_title",
+            name: "role_title",
             message: "What is the title of the new role?",
           },
           {
             type: "input",
-            name: "roles_department_id",
+            name: "role_department_id",
             message: "What is the department ID of the new role?",
           },
         ])
-        .then(({ roles_title, roles_departments_id }) => {
+        .then(({ role_title, role_department_id }) => {
           return pool.query(
-            "INSERT INTO roles (title, departments_id) VALUES ($1, $2)",
-            [roles_title, roles_departments_id]
+            "INSERT INTO roles (title, department_id) VALUES ($1, $2)",
+            [role_title, role_department_id]
           );
         })
         .then(() => {
@@ -121,7 +119,7 @@ inquirer
     if (action === "update an employee role") {
       // Fetch all employees
 
-  pool.query("SELECT id, first_name, last_name FROM employees;")
+  pool.query("SELECT id, first_name, last_name FROM employee;")
   .then((results) => {
     const employees = results.rows.map(emp => ({
       name: `${emp.first_name} ${emp.last_name}`,
@@ -131,13 +129,13 @@ inquirer
     return inquirer.prompt([
       {
         type: "list",
-        name: "employees_id",
+        name: "employee_id",
         message: "Select the employee to update:",
         choices: employees
       }
     ]);
   })
-  .then(({ employees_id }) => {
+  .then(({ employee_id }) => {
     // Fetch all roles
     return pool.query("SELECT id, title FROM roles;")
       .then((results) => {
@@ -153,14 +151,14 @@ inquirer
             message: "Select the new role:",
             choices: roles
           }
-        ]).then(({ new_role_id }) => ({ employees_id, new_role_id }));
+        ]).then(({ new_role_id }) => ({ employee_id, new_role_id }));
       });
   })
-  .then(({ employees_id, new_role_id }) => {
+  .then(({ employee_id, new_role_id }) => {
     // Update the employee's role
     return pool.query(
       "UPDATE employees SET role_id = $1 WHERE id = $2;",
-      [new_role_id, employees_id]
+      [new_role_id, employee_id]
     );
   })
   .then(() => {

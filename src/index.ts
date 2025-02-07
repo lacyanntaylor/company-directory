@@ -31,14 +31,14 @@ inquirer
     }
 
     if (action === "view all roles") {
-      pool.query("SELECT * FROM roles;").then((results) => {
+      pool.query("SELECT * FROM role;").then((results) => {
         console.table(results.rows),
         mainMenu();
       });
     }
 
     if (action === "view all employees") {
-      pool.query("SELECT * FROM employees;").then((results) => {
+      pool.query("SELECT * FROM employee;").then((results) => {
         console.table(results.rows),
         mainMenu();
       });

@@ -23,17 +23,20 @@ function mainMenu() {
         .then(({ action }) => {
         if (action === "view all departments") {
             pool.query("SELECT * FROM department;").then((results) => {
-                console.table(results.rows);
+                console.table(results.rows),
+                    mainMenu();
             });
         }
         if (action === "view all roles") {
             pool.query("SELECT * FROM roles;").then((results) => {
-                console.table(results.rows);
+                console.table(results.rows),
+                    mainMenu();
             });
         }
         if (action === "view all employees") {
             pool.query("SELECT * FROM employees;").then((results) => {
-                console.table(results.rows);
+                console.table(results.rows),
+                    mainMenu();
             });
         }
         if (action === "add a department") {
@@ -51,7 +54,8 @@ function mainMenu() {
                 ]);
             })
                 .then(() => {
-                console.log("Department has been added!");
+                console.log("Department has been added!"),
+                    mainMenu();
             });
         }
         if (action === "add a role") {
@@ -72,7 +76,8 @@ function mainMenu() {
                 return pool.query("INSERT INTO roles (title, department_id) VALUES ($1, $2)", [role_title, role_department_id]);
             })
                 .then(() => {
-                console.log("Role has been added!");
+                console.log("Role has been added!"),
+                    mainMenu();
             });
         }
         if (action === "add an employee") {
@@ -93,7 +98,8 @@ function mainMenu() {
                 return pool.query("INSERT INTO employees (first_name, last_name) VALUES ($1, $2)", [first_name, last_name]);
             })
                 .then(() => {
-                console.log("Employee has been added!");
+                console.log("Employee has been added!"),
+                    mainMenu();
             });
         }
         if (action === "update an employee role") {
@@ -136,7 +142,8 @@ function mainMenu() {
                 return pool.query("UPDATE employees SET role_id = $1 WHERE id = $2;", [new_role_id, employee_id]);
             })
                 .then(() => {
-                console.log("Employee role updated successfully!");
+                console.log("Employee role updated successfully!"),
+                    mainMenu();
             })
                 .catch((err) => console.error("Error updating employee role:", err));
         }

@@ -28,21 +28,11 @@ function mainMenu() {
             });
         }
         if (action === "view all roles") {
-            pool.query("SELECT * FROM role;")
-              .then((results) => {
-                if (results.rows.length === 0) {
-                  console.log("No roles found in database.");
-                } else {
-                  console.table(results.rows);
-                }
-                mainMenu();
-              })
-              .catch((err) => {
-                console.error("Error fetching roles:", err);
-                mainMenu();
-              });
-          }
-          
+            pool.query("SELECT * FROM role;").then((results) => {
+                console.table(results.rows),
+                    mainMenu();
+            });
+        }
         if (action === "view all employees") {
             pool.query("SELECT * FROM employee;").then((results) => {
                 console.table(results.rows),

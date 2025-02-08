@@ -34,15 +34,22 @@ inquirer
       pool.query("SELECT * FROM role;").then((results) => {
         console.table(results.rows);
         mainMenu();
+      }).catch(error => {
+        console.error('Error executing query:', error);
+        mainMenu();
       });
     }
-
+    
     if (action === "view all employees") {
       pool.query("SELECT * FROM employee;").then((results) => {
         console.table(results.rows);
         mainMenu();
+      }).catch(error => {
+        console.error('Error executing query:', error);
+        mainMenu();
       });
     }
+    
 
     if (action === "add a department") {
       inquirer
